@@ -1,5 +1,5 @@
 
-# 異質な処置効果の識別：Causal Forestを用いた分析
+# 治療効果の異質性の識別：Causal Forestを用いた分析
 
 このレポジトリは、Causal Forestを使用して治療効果の異質性（Heterogenous Treatment Effects, HTEs）を検証するサンプルです。`pandas`、`scikit-learn`、`causalml`、`matplotlib`などのライブラリを使用してPythonで書かれています。
 
