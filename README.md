@@ -1,7 +1,7 @@
 
 # 異質な処置効果の識別：Causal Forestを用いた分析
 
-このノートブックでは、Causal Forestを使用して異質な処置効果（HTE）を識別する方法をPythonで示します。元々の実装はRで行われていましたが、ここでは`pandas`、`scikit-learn`、`causalml`、`matplotlib`などのライブラリを使用してPythonに変換しています。
+このレポジトリは、Causal Forestを使用して治療効果の異質性（Heterogenous Treatment Effects, HTEs）を検証するサンプルです。`pandas`、`scikit-learn`、`causalml`、`matplotlib`などのライブラリを使用してPythonで書かれています。
 
 ## 必要なライブラリのインストール
 
@@ -146,3 +146,44 @@ print("ATE Results:", ate_results)
 ```
 
 以上の手順で、Causal Forestを使用して異質な処置効果を識別することができます。
+
+## サンプルデータセットの説明
+
+このノートブックでは、異質な処置効果（HTE）を識別するためにサンプルデータセットを使用します。以下のリンクからサンプルデータセットをダウンロードできます。
+
+[サンプルデータセットをダウンロード](sandbox:/mnt/data/sample_data.csv)
+
+### サンプルデータセットの概要
+
+サンプルデータセットには1000件のサンプルが含まれており、以下の変数が含まれています：
+
+- covariate_1, covariate_2, covariate_3, covariate_4, covariate_5: 共変量
+- treatment: 処置変数（0または1）
+- outcome: 結果変数
+
+### データの生成方法
+
+このデータは、以下の方法で生成されました：
+
+1. 共変量（covariate_1 から covariate_5）を標準正規分布に従って生成。
+2. 処置変数（treatment）を0.5の確率で二項分布に従って生成。
+3. 結果変数（outcome）は、処置変数に応じて異なる正規分布から生成。
+
+### ノートブックでの使用方法
+
+サンプルデータセットを使用する場合、以下のコードを実行してデータを読み込み、必要な変数を設定します：
+
+```python
+import pandas as pd
+
+# データの読み込み
+df = pd.read_csv("PATH_TO_YOUR_DOWNLOADED_SAMPLE_DATA/sample_data.csv")
+
+# 変数の定義
+COVARIATES_LIST = ["covariate_1", "covariate_2", "covariate_3", "covariate_4", "covariate_5"]
+OUTCOME = "outcome"
+TREATMENT = "treatment"
+
+X = df[COVARIATES_LIST]
+Y = df[OUTCOME].values
+W = df[TREATMENT].values
